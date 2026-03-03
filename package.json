@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "next dev -p 3000",
+    "dev:server": "npm --prefix server run dev",
     "build": "next build",
     "start": "next start -p 3000",
     "lint": "eslint"
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
     "autoprefixer": "^10.4.24",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "postcss": "^8.5.6",

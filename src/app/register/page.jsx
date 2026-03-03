@@ -38,7 +38,7 @@ export default function Register() {
     }
 
     try {
-      const data = await apiPost("/api/auth/register", { name, email, password }, false);
+      const data = await apiPost("/auth/register", { name, email, password }, false);
 
       setToken(data.token);
       setStatus("Account created ✅ Redirecting...");

@@ -39,11 +39,16 @@ function NavItem({ href, label }) {
 
 export default function SiteHeader() {
   const router = useRouter();
+  const pathname = usePathname();
+
   const authed = Boolean(getToken());
 
   const logout = () => {
     clearToken();
-    router.push("/");
+
+    // behave like original: go home after logout
+    router.replace("/");
+    router.refresh();
   };
 
   return (

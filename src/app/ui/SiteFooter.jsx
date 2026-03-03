@@ -1,3 +1,5 @@
+"use client";
+
 // src/app/ui/SiteFooter.jsx
 import Link from "next/link";
 

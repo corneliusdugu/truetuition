@@ -19,7 +19,7 @@ export default function Login() {
     setStatus("Signing you in...");
 
     try {
-      const data = await apiPost("/api/auth/login", { email, password }, false);
+      const data = await apiPost("/auth/login", { email, password }, false);
       setToken(data.token);
 
       setStatus("Login successful ✅ Redirecting...");
