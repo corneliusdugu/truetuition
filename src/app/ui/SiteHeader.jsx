@@ -1,10 +1,13 @@
-// client/src/ui/SiteHeader.jsx
-import { Link, NavLink, useNavigate } from "react-router-dom";
+"use client";
+
+// src/app/ui/SiteHeader.jsx
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { clearToken, getToken } from "../api/api";
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-3">
+    <Link href="/" className="flex items-center gap-3">
       <div className="grid h-10 w-10 place-items-center rounded-full bg-green-600 text-white font-black">
         TT
       </div>
@@ -18,30 +21,29 @@ function Logo() {
   );
 }
 
-function NavItem({ to, label }) {
+function NavItem({ href, label }) {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
   return (
-    <NavLink
-      to={to}
-      className={({ isActive }) =>
-        `rounded-lg px-3 py-2 text-sm font-semibold transition ${
-          isActive
-            ? "bg-green-50 text-green-700"
-            : "text-slate-700 hover:bg-slate-50"
-        }`
-      }
+    <Link
+      href={href}
+      className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
+        isActive ? "bg-green-50 text-green-700" : "text-slate-700 hover:bg-slate-50"
+      }`}
     >
       {label}
-    </NavLink>
+    </Link>
   );
 }
 
 export default function SiteHeader() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const authed = Boolean(getToken());
 
   const logout = () => {
     clearToken();
-    navigate("/");
+    router.push("/");
   };
 
   return (
@@ -50,23 +52,23 @@ export default function SiteHeader() {
         <Logo />
 
         <nav className="hidden md:flex items-center gap-1">
-          <NavItem to="/" label="Home" />
-          <NavItem to="/sdg4" label="About SDG 4" />
-          <NavItem to="/donate" label="Donate" />
-          <NavItem to="/dashboard" label="Dashboard" />
+          <NavItem href="/" label="Home" />
+          <NavItem href="/sdg4" label="About SDG 4" />
+          <NavItem href="/donate" label="Donate" />
+          <NavItem href="/dashboard" label="Dashboard" />
         </nav>
 
         <div className="flex items-center gap-2">
           {!authed ? (
             <>
               <Link
-                to="/login"
+                href="/login"
                 className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
                 Log in
               </Link>
               <Link
-                to="/register"
+                href="/register"
                 className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
               >
                 Sign up
@@ -75,7 +77,7 @@ export default function SiteHeader() {
           ) : (
             <>
               <Link
-                to="/donate"
+                href="/donate"
                 className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
               >
                 Donate
@@ -94,21 +96,18 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className="md:hidden border-t">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
-          <NavLink className="text-sm font-semibold text-slate-700" to="/">
+          <Link className="text-sm font-semibold text-slate-700" href="/">
             Home
-          </NavLink>
-          <NavLink className="text-sm font-semibold text-slate-700" to="/sdg4">
+          </Link>
+          <Link className="text-sm font-semibold text-slate-700" href="/sdg4">
             SDG4
-          </NavLink>
-          <NavLink className="text-sm font-semibold text-slate-700" to="/donate">
+          </Link>
+          <Link className="text-sm font-semibold text-slate-700" href="/donate">
             Donate
-          </NavLink>
-          <NavLink
-            className="text-sm font-semibold text-slate-700"
-            to="/dashboard"
-          >
+          </Link>
+          <Link className="text-sm font-semibold text-slate-700" href="/dashboard">
             Dashboard
-          </NavLink>
+          </Link>
         </div>
       </div>
     </header>

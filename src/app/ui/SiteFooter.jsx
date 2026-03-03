@@ -1,5 +1,5 @@
-// client/src/ui/SiteFooter.jsx
-import { Link } from "react-router-dom";
+// src/app/ui/SiteFooter.jsx
+import Link from "next/link";
 
 export default function SiteFooter() {
   return (
@@ -32,22 +32,22 @@ export default function SiteFooter() {
           <div>
             <div className="text-sm font-extrabold text-slate-900">Quick links</div>
             <div className="mt-3 grid gap-2 text-sm">
-              <Link className="text-slate-600 hover:text-green-700" to="/">
+              <Link className="text-slate-600 hover:text-green-700" href="/">
                 Home
               </Link>
-              <Link className="text-slate-600 hover:text-green-700" to="/sdg4">
+              <Link className="text-slate-600 hover:text-green-700" href="/sdg4">
                 About SDG 4
               </Link>
-              <Link className="text-slate-600 hover:text-green-700" to="/donate">
+              <Link className="text-slate-600 hover:text-green-700" href="/donate">
                 Donate
               </Link>
-              <Link className="text-slate-600 hover:text-green-700" to="/dashboard">
+              <Link className="text-slate-600 hover:text-green-700" href="/dashboard">
                 Dashboard
               </Link>
-              <Link className="text-slate-600 hover:text-green-700" to="/register">
+              <Link className="text-slate-600 hover:text-green-700" href="/register">
                 Create account
               </Link>
-              <Link className="text-slate-600 hover:text-green-700" to="/login">
+              <Link className="text-slate-600 hover:text-green-700" href="/login">
                 Login
               </Link>
             </div>
